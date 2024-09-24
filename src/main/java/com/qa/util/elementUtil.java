@@ -40,24 +40,29 @@ public abstract class elementUtil {
 	public elementUtil(WebDriver driver) {
 		this.driver = driver;
 		wdScreenshot = driver;
-		wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(40));
 	}
 	
     public elementUtil(Browser browser) {
+    	
 		if(browser == Browser.CHROME) {
+			
 			driver = new ChromeDriver();
 		}
 		else if(browser == Browser.EDGE){
+			driver.manage().window().maximize();
 			driver= new EdgeDriver();
 		}
 		else if(browser == Browser.FF){
+			driver.manage().window().maximize();
 			driver= new EdgeDriver();
 		}
 		wdScreenshot = driver;
-		wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(40));
 	}
 
     public void  goToWebSite(String string) {
+    	driver.manage().window().maximize();
        	driver.get(string);
     }
     
@@ -138,6 +143,7 @@ public abstract class elementUtil {
 		for(WebElement e : elementList) {
 			dataList.add(e.getText());
 		}
+		System.out.println(dataList);
 		return dataList;
     }
     
