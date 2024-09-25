@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.hc.core5.util.Asserts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -18,9 +19,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.aventstack.extentreports.util.Assert;
 import com.mchange.io.FileUtils;
 
 public abstract class elementUtil {
@@ -82,6 +85,11 @@ public abstract class elementUtil {
    	     element.clear();
     	 element.sendKeys(textToEnter);
      }
+     
+     public void VerifyIcons(By locator) {
+    	 WebElement element =	 wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    	 element.isDisplayed();
+ 	}
     
      public void enterKeyInto(By locator,Keys key) {
     	 WebElement element = driver.findElement(locator);
@@ -103,13 +111,29 @@ public abstract class elementUtil {
     	 jse.executeScript("arguments[0].click", locator);
      }
      
+     public String verifyTagname(By locator) {
+  
+ 		 WebElement tagname = driver.findElement(locator);
+ 		return tagname.getTagName();
+	}
+      
+     public void selectElementFromDropDown(By locators,String visibleText) {
+    	 WebElement dropdown =  driver.findElement(locators);
+    	 Select select =new Select(dropdown);
+    	 select.selectByVisibleText(visibleText);	
+	}
+     
+     
+     
     public boolean verifyelementDisplayed(By locator) {
    	 return driver.findElement(locator).isDisplayed();
    	   }
 	
     public String getVisibleText(By locator) {
-    	 WebElement element =	 wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        return element.getText();
+    	 WebElement element =	 wait.until(ExpectedConditions.visibilityOfElementLocated(locator));	 
+         String elements =  element.getText();
+        System.out.println(elements);
+         return elements;
     }
     
     public int Count(By locator) {
