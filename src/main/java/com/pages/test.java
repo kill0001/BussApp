@@ -10,7 +10,7 @@ public class test {
   static Youtube youtube;
   
   
-	public static void main(String[] args) {	
+	public static void main(String[] args) throws Throwable {	
      
 	LoginPage loginPage = new  LoginPage(Browser.CHROME);
 	   loginPage.EnterEmailAddress("ramya.shettys.ext@sonymusic.com");
@@ -26,24 +26,36 @@ public class test {
 	   youtube.dateRangeField();
 	   youtube.datePickerIcon();
 	   youtube.my_queries();
-	   youtube.content_Owner_key();
-	   youtube.checkBox1();
-	   youtube.checkBox2();
-	   youtube.Query_String();
-	   youtube.Format_SQL();
-	   youtube.refresh();
-	   youtube.save();
-	   youtube.developerslink();
-	   youtube.filterteredRowSummery();
-	   youtube.submitButton();
-	   youtube.clickManageQueryTemplates();
-//	   youtube.getAlltableheaders();
-	   youtube.manageQuerytableheader();
-	   youtube.editIcon();
-	   youtube.deleteIcon();
-	   youtube.manageQuerySearchbar();
+	   youtube.verify_content_Owner_key();
+	   youtube.verify_checkBox1();
+	   youtube.verify_checkBox2();
+	   youtube.verify_Query_String();
+	   youtube.verify_Format_SQL();
+	   youtube.verify_refresh();
+	   youtube.verify_save();
+	   youtube.verify_developerslink();
+	   youtube.verify_filterteredRowSummery();
+	   youtube.verify_submitButton();
+	   youtube.verify_clickManageQueryTemplates();
+	   youtube.verify_manageQuerytableheader();
+	   youtube.verify_editIcon();
+	   youtube.verify_deleteIcon();
+	   youtube.verifyManageQueryToggleButton();
+	   Thread.sleep(3000);
+	   youtube.verifyManageQueryToggleButton();
+	   youtube.verify_manageQuerySearchbar();
 	   youtube.checkForToggleButton();
 	   youtube.verifyManageQueryPagination();
+	   youtube.clickCreate_Query();
+	   youtube.enterValueInQueryTitle();
+	   youtube.pickDate();
+	   youtube.selectValueIntoMy_queries();
+//	   youtube.clickOnSubmit();
+//	   youtube.clickCreate_Query();
+	   youtube.enterQueryString();
+	   youtube.verifyRefreshButton();
+	   youtube.verifyScheduleIInterval();
+	   
 	}
 
 }

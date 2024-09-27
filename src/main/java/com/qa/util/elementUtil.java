@@ -17,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -31,6 +32,11 @@ public abstract class elementUtil {
 	private WebDriver driver;
 	private static WebDriver wdScreenshot;
 	private WebDriverWait wait ;
+	public String queryText = "SELECT\r\n" + "  a.user_request,\r\n"
+			+ "  count(distinct a.user_id) as total_user_count,\r\n" + "  sum(a.plays) as total_plays\r\n"
+			+ "FROM\r\n" + "  ytma.activity a\r\n" + "WHERE\r\n" + "  a.country_code = 'US'\r\n"
+			+ "  and a.content_type in (\"PMV\", \"PREMIUM_UGC\")\r\n" + "GROUP BY\r\n" + "  1\r\n"
+			+ "ORDER BY\r\n" + "  3 DESC\r\n" + "limit\r\n" + "  200;";
     
 	public WebDriver getDriver() {
 		return driver;
@@ -77,6 +83,11 @@ public abstract class elementUtil {
 		WebElement element =	 wait.until(ExpectedConditions.elementToBeClickable(locator));
     	element.click();
     }
+	
+	public void clickOnSubmitButton(By locator) {
+		WebElement element =	 wait.until(ExpectedConditions.elementToBeClickable(locator));
+    	element.submit();
+	}
     
      public void enterTextInto(By locator,String textToEnter) {
    	  //  WebElement element = driver.findElement(locator);
@@ -122,6 +133,11 @@ public abstract class elementUtil {
     	 Select select =new Select(dropdown);
     	 select.selectByVisibleText(visibleText);	
 	}
+     public void selectElementFromDropDownByIndex(By locators,int indexvalue) {
+    	 WebElement dropdown =  driver.findElement(locators);
+    	 Select select =new Select(dropdown);
+    	 select.selectByIndex(indexvalue);	
+	}
      
      
      
@@ -147,6 +163,10 @@ public abstract class elementUtil {
     public void findElement(By locator) {
     	 driver.findElements(locator);
      }
+    public void defaultClick() {
+    	Actions action = new Actions(driver);
+		action.click().perform();
+	}
     
 //    public ArrayList<GlobalDetailsPojo> getTableData(By tableLocator,By cell) {
 //    	List<WebElement>rowlist = findElements(tableLocator);
