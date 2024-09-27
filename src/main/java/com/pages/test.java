@@ -15,8 +15,8 @@ public class test {
 	LoginPage loginPage = new  LoginPage(Browser.CHROME);
 	   loginPage.EnterEmailAddress("ramya.shettys.ext@sonymusic.com");
 	   homePage =    loginPage.ClickOnNext();
-//	   loginPage.enterPassword("Rammi@100251");
-//	   loginPage.ClickOnSignIn();
+	   loginPage.enterPassword("Rammi@100251");
+      loginPage.ClickOnSignIn();
 	   bizQuery  = homePage.ClickOnBizQuery();
 	   youtube =  bizQuery.clickOnYouTubeButton();
 	   youtube.getAlltableheaders();
