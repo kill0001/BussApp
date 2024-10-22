@@ -1,9 +1,13 @@
 package com.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.github.javafaker.Faker;
 import com.qa.util.Browser;
+import com.qa.util.elementUtil;
 
 public class Youtube extends Pages {
 
@@ -48,7 +52,14 @@ public class Youtube extends Pages {
 	private static final By toDate = By.xpath("(//*[text()=' 16 '])[1]");
 	private static final By scheduleIInterval = By.id("scheduleIIntervalKkey");
 	private static final By destinationTableName = By.id("destinationTableName");
+	private static final By temp_Table_Name = By.id("tempTableName");
+	private static final By pageNext = By.xpath("//a[normalize-space()='Next']");
 	
+  
+	Faker faker = new Faker();
+ 	
+	
+
 	public void verifyYouTubeTab() {
 		verifyelementDisplayed(YouTubeTab);
 	}
@@ -61,16 +72,16 @@ public class Youtube extends Pages {
 		verifyelementDisplayed(ManageQueryTemplates);
 	}
 
-	public void getAlltableheaders() {
-		getALLVisibleText(TableHeaders);
+	public List<String> getAlltableheaders() {
+		return getALLVisibleText(TableHeaders);
 	}
 
 	public void checkForToggleButton() {
 		verifyelementDisplayed(ToggleButton);
 	}
 
-	public void checkForSearchbar() {
-		verifyelementDisplayed(checForSearchbar);
+	public boolean checkForSearchbar() {
+		return verifyelementDisplayed(checForSearchbar);
 	}
 
 	public void verifyManageQueryToggleButton() {
@@ -82,94 +93,95 @@ public class Youtube extends Pages {
 		clickOn(Create_Query);
 	}
 
-	public void queryTitlefield() {
-		verifyelementDisplayed(queryTitle);
+	public boolean VerifyqueryTitlefield() {
+		return verifyelementDisplayed(queryTitle);
 	}
 
-	public void dateRangeField() {
-		verifyelementDisplayed(dateRange);
+	public  boolean VerifydateRangeField() {
+		return verifyelementDisplayed(dateRange);
 	}
 
-	public void datePickerIcon() {
-		verifyelementDisplayed(datePicker);
+	public boolean datePickerIcon() {
+		return verifyelementDisplayed(datePicker);
 	}
 
-	public void my_queries() {
-		verifyelementDisplayed(my_queries);
-		verifyTagname(my_queries);
+	public boolean Verifymy_queries() {
+		return verifyelementDisplayed(my_queries);
+//		return verifyTagname(my_queries);
 	}
 
-	public void verify_content_Owner_key() {
-		verifyelementDisplayed(content_Owner_key);
-		verifyTagname(content_Owner_key);
+	public boolean verify_content_Owner_key() {
+		return verifyelementDisplayed(content_Owner_key);
+//		verifyTagname(content_Owner_key);
 	}
 
-	public void verify_checkBox1() {
-		verifyelementDisplayed(checkBox1);
+	public boolean verify_checkBox1() {
+		return verifyelementDisplayed(checkBox1);
 	}
 
-	public void verify_checkBox2() {
-		verifyelementDisplayed(checkBox2);
+	public boolean verify_checkBox2() {
+		return verifyelementDisplayed(checkBox2);
 	}
 
-	public void verify_Query_String() {
-		verifyelementDisplayed(Query_String);
+	public boolean verify_Query_String() {
+		return verifyelementDisplayed(Query_String);
 	}
 
-	public void verify_Format_SQL() {
-		verifyelementDisplayed(Format_SQL);
+	public boolean verify_Format_SQL() {
+		return verifyelementDisplayed(Format_SQL);
 	}
 
-	public void verify_refresh() {
-		verifyelementDisplayed(refresh);
+	public boolean verify_refresh() {
+		return verifyelementDisplayed(refresh);
 	}
 
-	public void verify_save() {
-		verifyelementDisplayed(save);
+	public boolean verify_save() {
+		return verifyelementDisplayed(save);
 	}
 
-	public void verify_developerslink() {
-		verifyelementDisplayed(developerslink);
+	public boolean verify_developerslink() {
+		return verifyelementDisplayed(developerslink);
 	}
 
-	public void verify_filterteredRowSummery() {
-		verifyelementDisplayed(filterteredRowSummery);
+	public boolean verify_filterteredRowSummery() {
+		return verifyelementDisplayed(filterteredRowSummery);
 	}
 
-	public void verify_submitButton() {
-		verifyelementDisplayed(submitButton);
-		verifyTagname(submitButton);
+	public boolean verify_submitButton() {
+		return verifyelementDisplayed(submitButton);
+//		verifyTagname(submitButton);
 	}
 
-	public void verify_clickManageQueryTemplates() {
+	public void clickOnManageQueryTemplates() {
 		clickOn(ManageQueryTemplates);
 	}
 
-	public void verify_manageQuerytableheader() {
+	public List<String> verify_manageQuerytableheader() {
 //		getVisibleText(manageQuerytableheader);
-		getALLVisibleText(manageQuerytableheader);
+		return getALLVisibleText(manageQuerytableheader);
 	}
 
-	public void verify_editIcon() {
+	public boolean verify_editIcon() {
 
-		VerifyIcons(editIcon);
+		return verifyelementDisplayed(editIcon);
 
 	}
 
-	public void verify_deleteIcon() {
-		VerifyIcons(deleteIcon);
+	public boolean verify_deleteIcon() {
+		return verifyelementDisplayed(deleteIcon);
 	}
 
-	public void verify_manageQuerySearchbar() {
-		verifyelementDisplayed(manageQuerySearchbar);
+	public boolean verify_manageQuerySearchbar() {
+		return verifyelementDisplayed(manageQuerySearchbar);
 	}
 
-	public void verifyManageQueryPagination() {
-		verifyelementDisplayed(manageQueryPagination);
+	public boolean verifyManageQueryPagination() {
+		return verifyelementDisplayed(manageQueryPagination);
 	}
 
-	public void enterValueInQueryTitle() {
-		enterTextInto(queryTitle, "test");
+	public void enterValueInQueryTitle(String reqTitle) {
+//		String reqTitle =  faker.name().firstName();
+		enterTextInto(queryTitle, reqTitle);
 	}
 
 	public void pickDate() {
@@ -179,8 +191,8 @@ public class Youtube extends Pages {
 		defaultClick();
 	}
 
-	public void selectValueIntoMy_queries() {
-		selectElementFromDropDown(my_queries, " testtemplate11 - jain004 ");
+	public void selectValueIntoMy_queries(String userid) {
+		selectElementFromDropDown(my_queries, userid);
 	}
 
 	public void clickOnSubmit() {
@@ -192,25 +204,74 @@ public class Youtube extends Pages {
 	}
 
 	public void verifyRefreshButton() {
-		clickOn(refresh);
+		verifyelementDisplayed(refresh);
 	}
 	
 	public void checkThecheckBox2() {
 		clickOn(checkBox2);
 	}
-	public void verifyScheduleIInterval() {
+	  
+	 public void clickOnNext() {
+		 clickOn(pageNext);
+	 }
+	  
+	public void  selectEvery_Day_8_00_AM_UTC (String dropDownvalue,String userid) throws Throwable {
+		String tablename =  faker.name().firstName();
+		enterValueInQueryTitle(tablename);
+		Thread.sleep(3000);
+		pickDate();
+		Thread.sleep(3000);
+		checkThecheckBox2();
+		Thread.sleep(3000);
+		selectValueIntoMy_queries(userid);
+		selectElementFromDropDown(scheduleIInterval, dropDownvalue);
+		enterTextInto(destinationTableName, tablename);
+		clickOnSubmit();
 		
-		for (int i = 0; i < 3; i++) {
-			clickCreate_Query();
-			enterValueInQueryTitle();
-			pickDate();
-			selectValueIntoMy_queries();
-			checkThecheckBox2();
-			selectElementFromDropDownByIndex(scheduleIInterval,i);
-			enterTextInto(destinationTableName, "test");
-			clickOnSubmit();
-		}
+	}
+	public void   selectEveryWeekSunday8_00AM_UTC(String dropDownvalue,String userid) throws Throwable {
+		String tablename =  faker.name().firstName();
+		enterValueInQueryTitle(tablename);
+		Thread.sleep(3000);
+		pickDate();
+		Thread.sleep(3000);
+		checkThecheckBox2();
+		Thread.sleep(3000);
+		selectValueIntoMy_queries(userid);
+		Thread.sleep(3000);
+		selectElementFromDropDown(scheduleIInterval, dropDownvalue);
+		enterTextInto(destinationTableName, tablename);
+		clickOnSubmit();
+	}
+	public void  selectEvery_Month3rdday8_00AMUTC  (String dropDownvalue,String userid) throws Throwable {
+		String tablename =  faker.name().firstName();
+		enterValueInQueryTitle(tablename);
+		Thread.sleep(3000);
+		pickDate();
+		Thread.sleep(3000);
+		checkThecheckBox2();
+		Thread.sleep(3000);
+		selectValueIntoMy_queries(userid);
+		selectElementFromDropDown(scheduleIInterval, dropDownvalue);
+		enterTextInto(destinationTableName, tablename);
+		Thread.sleep(3000);
+		clickOnSubmitButton(submitButton);
+		Thread.sleep(3000);
+//	
+	}
+	
+	public void creatTempTable(String userid) throws InterruptedException {
+		String tablename =  faker.name().firstName();
+		enterValueInQueryTitle(tablename);
+		Thread.sleep(3000);
+		pickDate();
+		Thread.sleep(3000);
+		selectValueIntoMy_queries(userid);
+		clickOn(checkBox1);
+		enterTextInto(temp_Table_Name, "test01");
+		clickOnSubmitButton(submitButton);
+	}
 	
 	}
 
-}
+

@@ -20,8 +20,8 @@ public class BizQuery  extends Pages{
 	private static final By Youtube = By.xpath("//button[@class = 'btn']");
 	
 	
-	public void verifyforYoutubeButton() {
-		verifyelementDisplayed(Youtube);
+	public String verifyforYoutubeButton() {
+        return		getVisibleText(Youtube);
 	}
 	
 	public Youtube clickOnYouTubeButton() {

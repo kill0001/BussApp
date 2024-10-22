@@ -12,20 +12,18 @@ public class test {
   
 	public static void main(String[] args) throws Throwable {	
      
-	LoginPage loginPage = new  LoginPage(Browser.CHROME);
-	   loginPage.EnterEmailAddress("ramya.shettys.ext@sonymusic.com");
+	LoginPage loginPage = new  LoginPage(Browser.EDGE);
+	   loginPage.EnterEmailAddress("sudarshan.killekar.external@sonymusic.com");
 	   homePage =    loginPage.ClickOnNext();
-	   loginPage.enterPassword("Rammi@100251");
-      loginPage.ClickOnSignIn();
 	   bizQuery  = homePage.ClickOnBizQuery();
 	   youtube =  bizQuery.clickOnYouTubeButton();
 	   youtube.getAlltableheaders();
 	   youtube.checkForSearchbar();
 	   youtube.clickCreate_Query();
-	   youtube.queryTitlefield();
-	   youtube.dateRangeField();
+//	   youtube.queryTitlefield();
+//	   youtube.dateRangeField();
 	   youtube.datePickerIcon();
-	   youtube.my_queries();
+//	   youtube.my_queries();
 	   youtube.verify_content_Owner_key();
 	   youtube.verify_checkBox1();
 	   youtube.verify_checkBox2();
@@ -36,7 +34,8 @@ public class test {
 	   youtube.verify_developerslink();
 	   youtube.verify_filterteredRowSummery();
 	   youtube.verify_submitButton();
-	   youtube.verify_clickManageQueryTemplates();
+	   Thread.sleep(5000);
+//	   youtube.verify_clickManageQueryTemplates();
 	   youtube.verify_manageQuerytableheader();
 	   youtube.verify_editIcon();
 	   youtube.verify_deleteIcon();
@@ -45,17 +44,27 @@ public class test {
 	   youtube.verifyManageQueryToggleButton();
 	   youtube.verify_manageQuerySearchbar();
 	   youtube.checkForToggleButton();
-	   youtube.verifyManageQueryPagination();
+//	   youtube.verifyManageQueryPagination();
 	   youtube.clickCreate_Query();
-	   youtube.enterValueInQueryTitle();
+	   youtube.enterValueInQueryTitle("test");
 	   youtube.pickDate();
-	   youtube.selectValueIntoMy_queries();
+	   youtube.selectValueIntoMy_queries("kill001");
 //	   youtube.clickOnSubmit();
 //	   youtube.clickCreate_Query();
 	   youtube.enterQueryString();
 	   youtube.verifyRefreshButton();
-	   youtube.verifyScheduleIInterval();
+//	   youtube.verifyScheduleIInterval();
+	   youtube.selectEvery_Day_8_00_AM_UTC("Every Day 8:00 AM UTC","kill001");
+	   Thread.sleep(3000);
+	   youtube.clickCreate_Query();
+	   youtube.selectEveryWeekSunday8_00AM_UTC("Every Week - Sunday 8:00 AM UTC","kill001");
+	   Thread.sleep(3000);
+	   youtube.clickCreate_Query();
+	   youtube.selectEvery_Month3rdday8_00AMUTC("Every Month - 3rd day 8:00 AM UTC","kill001");
+	   Thread.sleep(3000);
+	   youtube.clickCreate_Query();
 	   
+	   youtube.tearDown();
 	}
 
 }

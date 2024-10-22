@@ -17,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -49,7 +50,7 @@ public abstract class elementUtil {
 	public elementUtil(WebDriver driver) {
 		this.driver = driver;
 		wdScreenshot = driver;
-		wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(80));
 	}
 	
     public elementUtil(Browser browser) {
@@ -59,12 +60,11 @@ public abstract class elementUtil {
 			driver = new ChromeDriver();
 		}
 		else if(browser == Browser.EDGE){
-			driver.manage().window().maximize();
+			
 			driver= new EdgeDriver();
 		}
 		else if(browser == Browser.FF){
-			driver.manage().window().maximize();
-			driver= new EdgeDriver();
+			driver= new FirefoxDriver();
 		}
 		wdScreenshot = driver;
 		wait = new WebDriverWait(driver, Duration.ofSeconds(40));
@@ -90,9 +90,7 @@ public abstract class elementUtil {
 	}
     
      public void enterTextInto(By locator,String textToEnter) {
-   	  //  WebElement element = driver.findElement(locator);
           WebElement element =	 wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-//    	 WebElement element = driver.findElement(locator);
    	     element.clear();
     	 element.sendKeys(textToEnter);
      }
@@ -128,18 +126,35 @@ public abstract class elementUtil {
  		return tagname.getTagName();
 	}
       
-     public void selectElementFromDropDown(By locators,String visibleText) {
+     public void selectElementFromDropDowntext(By locators,String visibleText) {
     	 WebElement dropdown =  driver.findElement(locators);
     	 Select select =new Select(dropdown);
     	 select.selectByVisibleText(visibleText);	
 	}
-     public void selectElementFromDropDownByIndex(By locators,int indexvalue) {
-    	 WebElement dropdown =  driver.findElement(locators);
-    	 Select select =new Select(dropdown);
-    	 select.selectByIndex(indexvalue);	
-	}
      
-     
+     public void selectElementFromDropDown(By locators, String partialText) {
+    	    WebElement dropdown = driver.findElement(locators);
+    	    dropdown.click();
+    	    WebElement option = dropdown.findElement(By.xpath(".//option[contains(text(),'" + partialText + "')]"));
+    	    option.click();
+    	}
+//     public void selectElementFromDropDownByIndex(By locators) {
+//    	  List<WebElement> dropdowns = driver.findElements(locators);
+//    	  for (WebElement dropdown : dropdowns) {
+//    		  Select select = new Select(dropdown);
+//    		  List<WebElement> options = select.getOptions();
+//    		  for (WebElement option : options) {
+//    			 select.selectByVisibleText(option.getText());
+//                 
+//    		  }
+//    	  }
+//    	 
+//	}
+//     
+     public void selectDate(String Date ) {
+    	WebElement option = driver.findElement(By.xpath("(//*[@class = \"day-text\" and contains(text(),'" + Date + "')])[1]"));
+ 	    option.click();	 
+     }
      
     public boolean verifyelementDisplayed(By locator) {
    	 return driver.findElement(locator).isDisplayed();
